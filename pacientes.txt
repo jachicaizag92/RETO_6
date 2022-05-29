@@ -1,0 +1,4 @@
+{'tipo_documento': 'CC', 'numero_documento': '1144160583', 'nombre': 'John', 'apellido': 'Chicaiza', 'fecha_nacimiento': '1992-08-24', 'rh_grupo': 'O+', 'email': 'jachicaiza@gmail.com', 'telefono': '3217605762', 'cita': 'Sin cita'}
+{'tipo_documento': 'TI', 'numero_documento': '92082427', 'nombre': 'Alejandro', 'apellido': 'Chicaiza', 'fecha_nacimiento': '2000-10-08', 'rh_grupo': 'O-', 'email': 'alejito@gmail.com', 'telefono': '3155551552', 'cita': 'Sin cita'}
+{'tipo_documento': 'CC', 'numero_documento': '65465462', 'nombre': 'John', 'apellido': 'Chicaiza', 'fecha_nacimiento': '1992-08-24', 'rh_grupo': 'O+', 'email': 'jachi@outlook.com', 'telefono': '3217605763', 'cita': 'Sin cita'}
+{'tipo_documento': 'CC', 'numero_documento': '1144160583', 'nombre': 'klasdjlas', 'apellido': 'asdasd', 'fecha_nacimiento': '1992-08-24', 'rh_grupo': 'O-', 'email': 'jachicaiza@outlook.com', 'telefono': '3217605764', 'cita': 'Sin cita'}

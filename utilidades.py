@@ -1,141 +1,195 @@
+from datetime import datetime
 import re
-from datetime import datetime as dt
+from os import system, name
 
-def longitud_caracteres(documento:str, longitud_max:int, longitud_min:int = 1):
-    """Función que tiene como objetivo el validar los caracteres en la totalidad de su longitud
-        de acuerdo al numero de caracteres valido ingresado para la funcion.
+def convertir_entero (stringValue):
+  """ 
+	Función encarga de convertir a entero
 
-    Args:
-        documento (str): numero de documento
-        longitud (int): tamaño de caracteres permitidos a validar
+	Parameters
+	-----------------
+	stringValue : str
 
-    Returns:
-        bool: retorna True en caso de cumplir la validacion False en caso contrario
-    """
-    if documento.__len__() <= longitud_max and documento.__len__() >= longitud_min:
-        return True
-    else:
-        return False
+	Returns
+	------------------
+	int 
+	"""
+  # No permitir ingreso
+  try:
+    entero = int(stringValue)
+    return entero
+  except ValueError:
+    return 0
+  
+def validar_tipo_documento (stringTipo):
+  """ 
+	Función validar el tipo de documento
 
-def buscar_simbolo(texto:str, simbolo:str):
-    """funcion encargada de buscar un simbolo y compararlo con el texto
+	Parameters
+	-----------------
+	stringTipo : str
 
-    Args:
-        texto (str): _description_
-        simbolo (str): _description_
+	Returns
+	------------------
+	bool 
+	"""
+  lista_tipo = ["CC", "CE", "TI", "PA"]
+  
+  if stringTipo in lista_tipo:
+    return True
+  else:
+    return False
+  
+def validar_numero_documento (stringNumero):
+  """ 
+	Función validar el numero de documento
 
-    Returns:
-        bool: retorna True en caso de cumplir la validacion False en caso contrario
-    """
-    if re.search(rf'(.)\{simbolo}', texto):
-        return True
-    else:
-        return False
+	Parameters
+	-----------------
+	stringNumero : str
 
-def tipo_doc(documento:str):
-    """Esta función tiene como objetivo el validar el tipo de documento CC, TI, PA
+	Returns
+	------------------
+	bool 
+	"""
+  if stringNumero.isdigit() and len(stringNumero) > 6 and len(stringNumero) < 13 and stringNumero[0] != "0":
+    return True
+  else:
+    return False
 
-    Args:
-        documento (str): tipo de documento ingresado a la función
+def validar_nombre (stringNombre):
+  """ 
+	Función validar el nombre del usuario
 
-    Returns:
-        bool: retorna True en caso de cumplir la validacion False en caso contrario
-    """
-    
-    if documento == 'CC' or documento == 'TI' or documento == 'PA':
-        return True
-    else:
-        return False
+	Parameters
+	-----------------
+	stringNombre : str
 
-def validar_numero_doc(documento:str):
-    if bool(re.search(r'\D', documento)) == False:
-        return True
-    else:
-        return False
+	Returns
+	------------------
+	bool 
+	"""
+  if stringNombre.isalpha() and len(stringNombre) < 31 and stringNombre !="":
+    return True
+  else:
+    return False
 
-def validar_correo(correo:str):
-    """Funcion que nos permite validar el correo analizando analizando correo electronico
-        dominio.
+def validar_fecha (stringFecha, formato):
+  """ 
+	Función validar las fecha
 
-    Args:
-        correo (string): _description_
+	Parameters
+	-----------------
+	stringFecha : str
 
-    Returns:
-        bool: retorna True en caso de cumplir la validacion False en caso contrario
-    """
-    expresion = r'^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
-    if validar_longitud_caracteres(correo,30,6) and re.search(expresion,correo):
-        return True
-    else:
-        return False
+	Returns
+	------------------
+	bool 
+	"""
+  try:
+    stringFecha = datetime.strptime(stringFecha, formato)
+    return True
+  except ValueError:
+    return False
+  
+def validar_rh (stringSangre):
+  """ 
+	Función validar las fecha
 
-def validar_rh(rh:str):
-    """Funcion que permite valiadar las primres posiciones del RH y grupo sanguineo
+	Parameters
+	-----------------
+	stringSangre : str
 
+	Returns
+	------------------
+	bool 
+	"""
+  lista_grupo_sanguineo = ["O","A","B"]
+  lista_positivo_negativo = ["+","-"]
+  
+  if len(stringSangre) == 2 and stringSangre[0] in lista_grupo_sanguineo and stringSangre[1] in lista_positivo_negativo:
+    return True
+  else:
+    return False
+  
+def validar_correo (stringCorreo):
+  """ 
+	Función validar correo
 
-    Args:
-        rh (str): rh y grupo sanguineo (O+)
+	Parameters
+	-----------------
+	stringCorreo : str
 
-    Returns:
-        _type_: _description_
-    """
+	Returns
+	------------------
+	bool 
+	"""
+  patron = '^[(a-z0-9\_\-\.)]{3,10}@[(a-z0-9\_\-)]{3,}\.[(a-z)]{2,3}'
+  if re.search(patron, stringCorreo) and len(stringCorreo) < 51:
+    return True
+  else:
+    return False
+  
+  
 
-    if validar_longitud_caracteres(rh, 2):
-        if rh[0] == 'O' or rh[0] == 'A' or rh[0]=='B' :
-            if buscar_simbolo(rh, '+') or buscar_simbolo(rh, '-'):
-                return True
-            else:
-                return False
-        else:
-            return False
-    else:
-        return False
+def validar_telefono (stringTelefono):
+  """ 
+	Función validar telefono
 
+	Parameters
+	-----------------
+	stringTelefono : str
 
+	Returns
+	------------------
+	bool 
+	"""
+  if stringTelefono.isdigit() and len(stringTelefono) > 6 and len(stringTelefono) < 11:
+    return True
+  else:
+    return False
+  
+def buscar_documento (tipo,documento, lista):
+  """ 
+	Función buscar documento
 
+	Parameters
+	-----------------
+	stringDocumento : str
 
-def registrar_cita():
-    pass
+	Returns
+	------------------
+	bool 
+	"""
+  documento_existe = False
+  for elemento in lista:
+    if elemento["numero_documento"] == documento and elemento["tipo_documento"] == tipo:
+      documento_existe = True
+  return documento_existe
 
-def cargar_archivos():
-    pass
+def buscar_usuario (tipo,documento, lista):
+  """ 
+	Función buscar usuario
 
-def buscar():
-    pass
+	Parameters
+	-----------------
+	tipo : str
+    documento : str
+    lista : list
 
-def salir():
-    print("salir")
+	Returns
+	------------------
+	dict
 
+	"""
+  usuario = None
+  for elemento in lista:
+    if elemento["numero_documento"] == documento and elemento["tipo_documento"] == tipo:
+      return elemento
+  return usuario
 
-def menu():
-    op = 0
-
-    while op != 5:
-
-        print("1. Registrar paciente")
-        print("2. Registrar cita")
-        print("3. Cargar Archivos")
-        print("4. Busqueda por filtro")
-        print("5. Salir del programa")
-        op = int(input("digite su opcion: "))
-
-        if op == 1:
-            print('\n\n****************************************************************************')
-            print('****************************************************************************')
-            print('                           FORMULARIO DE REGISTRO                              ')
-            print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n')
-
-            tipo_documento = input("Ingrese el tipo de documento (CC, TI, PA): ").upper()
-
-            if tipo_documento(tipo_documento):
-                pass
-                
-            
-        elif op == 2:
-            registrar_cita()
-        elif op == 3:
-            cargar_archivos()
-        elif op == 4:
-            buscar()
-        elif op == 5:
-            salir()
+def clear():
+	if name == 'nt':
+		_ = system('cls')
+	else:
+		_ = system('clear')

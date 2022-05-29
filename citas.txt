@@ -1,0 +1,1 @@
+[('CC', '1144160583', '2022-05-31 4:00'), {'tipo_documento': 'CC', 'numero_documento': '1144160583', 'nombre': 'klasdjlas', 'apellido': 'asdasd', 'fecha_nacimiento': '1992-08-24', 'rh_grupo': 'O+', 'email': 'jachicaiza@outlook.com', 'telefono': '3217605762', 'cita': 'Sin cita'}]
